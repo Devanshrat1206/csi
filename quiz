@@ -1,0 +1,20 @@
+<html>
+<html>
+<head>
+    <title>Take Quiz</title>
+</head>
+<body style="background-color: antiquewhite;">
+    <h2 style="color:midnightblue; font-size:xx-large;"><center><b><u><i>Take Quiz</i></u></b></center></h2>
+    <form id="takeQuizForm" action="/take/<quiz_id>" method="post">
+        {% for question in quiz['questions'] %}
+            <div>
+                <p>{{ question['question'] }}</p>
+                {% for choice in question['choices'] %}
+                    <input type="radio" name="{{ loop.index0 }}" value="{{ choice }}"> {{ choice }} <br>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
+    </form>
+</body>
+</html>
