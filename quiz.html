@@ -1,0 +1,69 @@
+<html>
+<head>
+    <title>QuizQuest: Unleash Your Knowledge!</title>
+</head>
+<body style="background-color: antiquewhite;">
+        <h1 style="color:orange;"><b><i><u><center>
+            "QuizQuest: Unleash Your Knowledge!"</b></i></u></center></h1>
+        <form id="createQuizForm" action="/create" method="post">
+            <h2 style="color:magenta; font-size:xx-large;"><center><u><i><b>Create Quiz</center></b></i></u></h2>
+            <label for="quiz-title" style="color:blueviolet; font-size:x-large;"><center><u><i><b>Quiz Title:</b></i></u></center></label><br><br>
+            <center><input type="text" id="quiz-title" name="quiz-title" size="100" required></center><br><br>
+            <div id="questions">
+                <label for="question1" style="color:goldenrod; font-size:larger;"><u><b><center>Question 1:</center></b></u></label><br><br>
+                <center><input type="text" id="question1" name="question1" size="200" required><br><br></center>
+                <label for="choices" style="color:brown"><center><u><b>A.</u></b></center></label><br><br>
+                <center><input type="text" id="choicesA1" name="choicesA1" size="150" required><br><br></center>
+                <label for="choices" style="color:brown"><center><u><b>B.</u></b></center></label><br><br>
+                <center><input type="text" id="choicesB1" name="choicesB1" size="150" required><br><br></center>
+                <label for="choices" style="color:brown"><center><u><b>C.</u></b></center></label><br><br>
+                <center><input type="text" id="choicesC1" name="choicesC1" size="150" required><br><br></center>
+                <label for="choices" style="color:brown"><center><u><b>D.</u></b></center></label><br><br>
+                <center><input type="text" id="choicesD1" name="choicesD1" size="150" required><br><br></center>
+            </div>
+            <div style="text-align:center;">
+                <button type="submit"  onclick="addQuestion()" style="font-size:25px; padding:10px 10px 10px 10px; background-color:lightblue; color:darkcyan;">Add question</button><br><br><br>
+                <button type="submit" style="font-size:25px; padding:10px 10px 10px 10px; background-color:lightblue; color:darkcyan;">Create Quiz</button><br>
+            </div>
+        </form>
+        <script>
+            function addQuestion() {
+                // Get the reference to the questions container
+                var questionsContainer = document.getElementById('questions');
+        
+                // Calculate the next question number
+                var nextQuestionNumber = Math.floor(questionsContainer.children.length / 5) + 1;
+                var newQuestionLabel = document.createElement('label');
+                newQuestionLabel.textContent = 'Question ' + nextQuestionNumber + ':';
+                newQuestionLabel.style.color = 'goldenrod';
+                newQuestionLabel.style.fontSize = 'larger';
+                newQuestionLabel.innerHTML += '<br><br>';
+                var newQuestionInput = document.createElement('input');
+                newQuestionInput.type = 'text';
+                newQuestionInput.name = 'question' + nextQuestionNumber;
+                newQuestionInput.size = '200';
+                newQuestionInput.required = true;
+                newQuestionInput.innerHTML += '<br><br>';
+                var choices = ['A', 'B', 'C', 'D'];
+                var newChoiceInputs = [];
+                choices.forEach(function(choice) {
+                    var newChoiceLabel = document.createElement('label');
+                    newChoiceLabel.textContent = choice + '.';
+                    newChoiceLabel.style.color = 'brown';
+                    var newChoiceInput = document.createElement('input');
+                    newChoiceInput.type = 'text';
+                    newChoiceInput.name = 'choices' + choice + nextQuestionNumber;
+                    newChoiceInput.size = '150';
+                    newChoiceInput.required = true;
+                    newChoiceInputs.push(newChoiceLabel, newChoiceInput);
+                });
+                questionsContainer.appendChild(newQuestionLabel);
+                questionsContainer.appendChild(newQuestionInput);
+                newChoiceInputs.forEach(function(choiceInput) {
+                    questionsContainer.appendChild(choiceInput);
+                });
+            }
+        </script>
+</body>
+</html>
+
